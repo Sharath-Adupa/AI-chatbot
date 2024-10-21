@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Chatbot</title>
+</head>
+<body>
+    <h1>Simple Chatbot Interface</h1>
+    <input id="user_input" type="text" placeholder="Type a message...">
+    <button onclick="sendMessage()">Send</button>
+    <div id="chatbox"></div>
+
+    <script>
+        function sendMessage() {
+            const user_input = document.getElementById('user_input').value;
+            fetch(`/get?msg=${user_input}`)
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById('chatbox').innerHTML += `<p>User: ${user_input}</p>`;
+                    document.getElementById('chatbox').innerHTML += `<p>Bot: ${data}</p>`;
+                });
+        }
+    </script>
+</body>
+</html>
